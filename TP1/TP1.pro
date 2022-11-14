@@ -22,3 +22,8 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+unix|win32: LIBS += -L'D:/UNI/Courses/Fourth Year/Communication sans fil/Thevint Vincent/TDTP/Librairie+sample/LIB/' -lODALID_Education
+
+INCLUDEPATH += 'D:/UNI/Courses/Fourth Year/Communication sans fil/Thevint Vincent/TDTP/Librairie+sample/LIB'
+DEPENDPATH += 'D:/UNI/Courses/Fourth Year/Communication sans fil/Thevint Vincent/TDTP/Librairie+sample/LIB'

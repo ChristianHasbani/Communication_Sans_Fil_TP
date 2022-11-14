@@ -15,6 +15,14 @@ public:
     Window(QWidget *parent = nullptr);
     ~Window();
 
+private slots:
+    void on_connectButton_clicked();
+private slots:
+    void close_reader();
+private slots:
+   void end_program(int16_t status);
+
+
 private:
     Ui::Window *ui;
 };

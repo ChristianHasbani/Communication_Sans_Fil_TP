@@ -16,10 +16,10 @@ CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -g -Wall -Wextra -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++1z -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I..\TP1 -I. -ID:\Qt\5.15.2\mingw81_64\include -ID:\Qt\5.15.2\mingw81_64\include\QtWidgets -ID:\Qt\5.15.2\mingw81_64\include\QtGui -ID:\Qt\5.15.2\mingw81_64\include\QtANGLE -ID:\Qt\5.15.2\mingw81_64\include\QtCore -Idebug -I. -I/include -ID:\Qt\5.15.2\mingw81_64\mkspecs\win32-g++ 
+INCPATH       = -I..\TP1 -I. -I"D:\UNI\Courses\Fourth Year\Communication sans fil\Thevint Vincent\TDTP\Librairie+sample\LIB" -ID:\Qt\5.15.2\mingw81_64\include -ID:\Qt\5.15.2\mingw81_64\include\QtWidgets -ID:\Qt\5.15.2\mingw81_64\include\QtGui -ID:\Qt\5.15.2\mingw81_64\include\QtANGLE -ID:\Qt\5.15.2\mingw81_64\include\QtCore -Idebug -I. -I/include -ID:\Qt\5.15.2\mingw81_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        D:\Qt\5.15.2\mingw81_64\lib\libQt5Widgets.a D:\Qt\5.15.2\mingw81_64\lib\libQt5Gui.a D:\Qt\5.15.2\mingw81_64\lib\libQt5Core.a  -lmingw32 D:\Qt\5.15.2\mingw81_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
+LIBS        =        -L"D:\UNI\Courses\Fourth Year\Communication sans fil\Thevint Vincent\TDTP\Librairie+sample\LIB" -lODALID_Education D:\Qt\5.15.2\mingw81_64\lib\libQt5Widgets.a D:\Qt\5.15.2\mingw81_64\lib\libQt5Gui.a D:\Qt\5.15.2\mingw81_64\lib\libQt5Core.a  -lmingw32 D:\Qt\5.15.2\mingw81_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
 QMAKE         = D:\Qt\5.15.2\mingw81_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -214,7 +214,7 @@ debug/moc_window.cpp: ../TP1/window.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtGui/qtouchdevice.h \
 		debug/moc_predefs.h \
 		D:/Qt/5.15.2/mingw81_64/bin/moc.exe
-	D:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/chris/Documents/GitHub/TP1/build-TP1-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/moc_predefs.h -ID:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/chris/Documents/GitHub/TP1/TP1 -ID:/Qt/5.15.2/mingw81_64/include -ID:/Qt/5.15.2/mingw81_64/include/QtWidgets -ID:/Qt/5.15.2/mingw81_64/include/QtGui -ID:/Qt/5.15.2/mingw81_64/include/QtANGLE -ID:/Qt/5.15.2/mingw81_64/include/QtCore -I. -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -ID:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\TP1\window.h -o debug\moc_window.cpp
+	D:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/chris/Documents/GitHub/TP1/build-TP1-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/moc_predefs.h -ID:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/chris/Documents/GitHub/TP1/TP1 -I"D:/UNI/Courses/Fourth Year/Communication sans fil/Thevint Vincent/TDTP/Librairie+sample/LIB" -ID:/Qt/5.15.2/mingw81_64/include -ID:/Qt/5.15.2/mingw81_64/include/QtWidgets -ID:/Qt/5.15.2/mingw81_64/include/QtGui -ID:/Qt/5.15.2/mingw81_64/include/QtANGLE -ID:/Qt/5.15.2/mingw81_64/include/QtCore -I. -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -ID:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\TP1\window.h -o debug\moc_window.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -456,7 +456,41 @@ debug/window.o: ../TP1/window.cpp ../TP1/window.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qfiledevice.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtGui/qvector2d.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtGui/qtouchdevice.h \
-		ui_window.h
+		ui_window.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/QVariant \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/qapplication.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qeventloop.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/qdesktopwidget.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtGui/qguiapplication.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtGui/qinputmethod.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/QGroupBox \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/qgroupbox.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/qframe.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLabel \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/qlabel.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtGui/qicon.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Core.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/TypeDefs.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Hardware.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Librairie.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Core_Version.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Sw_Device.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Sw_Mf_Classic.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Sw_Poll.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Sw_ISO14443-4.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Sw_ISO14443A-3.h \
+		D:/UNI/Courses/Fourth\ Year/Communication\ sans\ fil/Thevint\ Vincent/TDTP/Librairie+sample/LIB/Tools.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\window.o ..\TP1\window.cpp
 
 debug/moc_window.o: debug/moc_window.cpp 
