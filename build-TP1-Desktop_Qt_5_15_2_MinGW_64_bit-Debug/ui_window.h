@@ -35,6 +35,7 @@ public:
     QPushButton *connectButton;
     QPushButton *disconnectButton;
     QLabel *versionLabel;
+    QPushButton *readCardBtn;
 
     void setupUi(QWidget *Window)
     {
@@ -56,11 +57,11 @@ public:
         nomText = new QLineEdit(groupBox);
         nomText->setObjectName(QString::fromUtf8("nomText"));
         nomText->setGeometry(QRect(120, 40, 113, 28));
-        nomText->setReadOnly(true);
+        nomText->setReadOnly(false);
         prenomText = new QLineEdit(groupBox);
         prenomText->setObjectName(QString::fromUtf8("prenomText"));
         prenomText->setGeometry(QRect(120, 80, 113, 28));
-        prenomText->setReadOnly(true);
+        prenomText->setReadOnly(false);
         groupBox_2 = new QGroupBox(Window);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setGeometry(QRect(300, 230, 391, 121));
@@ -82,7 +83,10 @@ public:
         disconnectButton->setGeometry(QRect(120, 520, 91, 29));
         versionLabel = new QLabel(Window);
         versionLabel->setObjectName(QString::fromUtf8("versionLabel"));
-        versionLabel->setGeometry(QRect(30, 560, 181, 20));
+        versionLabel->setGeometry(QRect(30, 490, 181, 20));
+        readCardBtn = new QPushButton(Window);
+        readCardBtn->setObjectName(QString::fromUtf8("readCardBtn"));
+        readCardBtn->setGeometry(QRect(20, 560, 191, 29));
 
         retranslateUi(Window);
 
@@ -102,6 +106,7 @@ public:
         connectButton->setText(QCoreApplication::translate("Window", "Connect", nullptr));
         disconnectButton->setText(QCoreApplication::translate("Window", "Disconnect", nullptr));
         versionLabel->setText(QString());
+        readCardBtn->setText(QCoreApplication::translate("Window", "Read Card", nullptr));
     } // retranslateUi
 
 };

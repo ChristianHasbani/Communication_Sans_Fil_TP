@@ -17,13 +17,9 @@ public:
 
 private slots:
     void on_connectButton_clicked();
-private slots:
     void close_reader();
-private slots:
-   void end_program(int16_t status);
-private slots:
-   int readInfo(uint8_t sect_count);
-
+    void end_program(int16_t status);
+    void on_readCardBtn_clicked();
 
 private:
     Ui::Window *ui;
