@@ -21,6 +21,8 @@ private slots:
     void close_reader();
 private slots:
    void end_program(int16_t status);
+private slots:
+   int readInfo(uint8_t sect_count);
 
 
 private:
