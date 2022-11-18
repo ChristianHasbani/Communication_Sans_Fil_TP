@@ -127,3 +127,9 @@ void Window::on_readCardBtn_clicked()
 
 }
 
+
+void Window::on_quitBtn_clicked()
+{
+
+}
+

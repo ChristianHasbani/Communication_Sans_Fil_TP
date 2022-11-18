@@ -21,6 +21,8 @@ private slots:
     void end_program(int16_t status);
     void on_readCardBtn_clicked();
 
+    void on_quitBtn_clicked();
+
 private:
     Ui::Window *ui;
 };

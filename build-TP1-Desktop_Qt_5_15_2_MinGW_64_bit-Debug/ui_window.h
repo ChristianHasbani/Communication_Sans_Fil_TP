@@ -36,6 +36,7 @@ public:
     QPushButton *disconnectButton;
     QLabel *versionLabel;
     QPushButton *readCardBtn;
+    QPushButton *quitBtn;
 
     void setupUi(QWidget *Window)
     {
@@ -77,16 +78,19 @@ public:
         groupBox_3->setGeometry(QRect(300, 380, 391, 121));
         connectButton = new QPushButton(Window);
         connectButton->setObjectName(QString::fromUtf8("connectButton"));
-        connectButton->setGeometry(QRect(20, 520, 91, 29));
+        connectButton->setGeometry(QRect(20, 440, 91, 29));
         disconnectButton = new QPushButton(Window);
         disconnectButton->setObjectName(QString::fromUtf8("disconnectButton"));
-        disconnectButton->setGeometry(QRect(120, 520, 91, 29));
+        disconnectButton->setGeometry(QRect(120, 440, 91, 29));
         versionLabel = new QLabel(Window);
         versionLabel->setObjectName(QString::fromUtf8("versionLabel"));
-        versionLabel->setGeometry(QRect(30, 490, 181, 20));
+        versionLabel->setGeometry(QRect(30, 530, 181, 20));
         readCardBtn = new QPushButton(Window);
         readCardBtn->setObjectName(QString::fromUtf8("readCardBtn"));
-        readCardBtn->setGeometry(QRect(20, 560, 191, 29));
+        readCardBtn->setGeometry(QRect(20, 480, 191, 29));
+        quitBtn = new QPushButton(Window);
+        quitBtn->setObjectName(QString::fromUtf8("quitBtn"));
+        quitBtn->setGeometry(QRect(680, 550, 83, 29));
 
         retranslateUi(Window);
 
@@ -106,7 +110,8 @@ public:
         connectButton->setText(QCoreApplication::translate("Window", "Connect", nullptr));
         disconnectButton->setText(QCoreApplication::translate("Window", "Disconnect", nullptr));
         versionLabel->setText(QString());
-        readCardBtn->setText(QCoreApplication::translate("Window", "Read Card", nullptr));
+        readCardBtn->setText(QCoreApplication::translate("Window", "Selectionner la carte", nullptr));
+        quitBtn->setText(QCoreApplication::translate("Window", "Quitter", nullptr));
     } // retranslateUi
 
 };
