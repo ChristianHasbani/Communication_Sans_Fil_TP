@@ -18,10 +18,17 @@ public:
 private slots:
     void on_connectButton_clicked();
     void close_reader();
-    void end_program(int16_t status);
     void on_readCardBtn_clicked();
-
+    void initCard();
     void on_quitBtn_clicked();
+    void on_disconnectButton_clicked();
+    void on_updateButton_clicked();
+    void on_payBtn_clicked();
+
+    void updateSuccessLEDBuzzer(int16_t status);
+    void updateFailedLEDBuzzer(int16_t status);
+
+    void on_chargeBtn_clicked();
 
 private:
     Ui::Window *ui;
