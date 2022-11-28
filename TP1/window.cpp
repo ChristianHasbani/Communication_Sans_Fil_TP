@@ -95,7 +95,7 @@ void Window::on_readCardBtn_clicked()
     uint16_t uid_len = 12;
     uint8_t data[16];
     uint32_t value = 0;
-//    status = ISO14443_3_A_PollCard(&MonLecteur, atq, sak, uid, &uid_len);
+
     initCard();
     memset(data, 0x00, 16);
 
@@ -167,12 +167,11 @@ void Window::on_updateButton_clicked()
 
 
     if(status == 0){
-        //update successful
        updateSuccessLEDBuzzer(status);
 
     }else{
-        //update failed
        updateFailedLEDBuzzer(status);
+       qDebug("Failed to update nom or prenom!!");
     }
 }
 
@@ -200,28 +199,32 @@ void Window::on_payBtn_clicked()
     uint32_t nbUnits =  ui->nbUnitText->text().toInt();
     uint32_t value = 0;
 
-    initCard();
 
     if(nbUnits <= 0){
         qDebug("Error not enough number of units!!");
         updateFailedLEDBuzzer(status);
-    }else if(nbDec >= nbUnits){
+    }else if(nbDec > nbUnits){
         qDebug("Error number to decrement exceeds the funds available!!");
         updateFailedLEDBuzzer(status);
     }else{
 
-        status = Mf_Classic_Decrement_Value(&MonLecteur,TRUE,14,nbUnits,13,AuthKeyA,3);
-        status = Mf_Classic_Restore_Value(&MonLecteur,TRUE,13,14,AuthKeyA,3);
+        status = Mf_Classic_Decrement_Value(&MonLecteur,TRUE,14,nbDec,13,AuthKeyA,3);
+        status = Mf_Classic_Restore_Value(&MonLecteur,TRUE,13,14,AuthKeyB,3);
 
         status = Mf_Classic_Read_Value(&MonLecteur,TRUE,14,&value,AuthKeyA,3);
+
+
         if(status == MI_OK){
             updateSuccessLEDBuzzer(status);
-            ui->nbDecSpinner->clear();
+            ui->nbDecSpinner->setValue(0);
+            ui->nbUnitText->setText(QString::number(value));
+            ui->nbUnitText->update();
+            ui->nbDecSpinner->update();
         }else{
             updateFailedLEDBuzzer(status);
+            qDebug("Failed to pay with card!!");
         }
-        ui->nbUnitText->setText(QString::number(nbUnits));
-        ui->nbUnitText->update();
+
     }
 
 
@@ -241,8 +244,16 @@ void Window::on_chargeBtn_clicked()
 
     status = Mf_Classic_Read_Value(&MonLecteur,TRUE,14,&value,AuthKeyA,3);
 
-    ui->nbUnitText->setText(QString::number(value));
-    ui->nbUnitText->update();
+    if(status == MI_OK){
+        updateSuccessLEDBuzzer(status);
+        ui->incrementSpinner->setValue(0);
+        ui->nbUnitText->setText(QString::number(value));
+        ui->nbUnitText->update();
+
+    }else{
+        updateFailedLEDBuzzer(status);
+        qDebug("Failed to charge!!");
+    }
 
 }
 
