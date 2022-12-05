@@ -32,5 +32,7 @@ private slots:
 
 private:
     Ui::Window *ui;
+    char * prenom;
+    char * nom;
 };
 #endif // WINDOW_H

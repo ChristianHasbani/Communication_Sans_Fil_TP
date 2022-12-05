@@ -1,7 +1,6 @@
 ﻿#include "window.h"
 #include "ui_window.h"
-
-
+#include <string>
 #include <time.h>
 #include <stdio.h>
 #include "MfErrNo.h"
@@ -12,7 +11,7 @@
 #include "Sw_ISO14443A-3.h"
 #include "TypeDefs.h"
 #include "Tools.h"
-
+#include <QMessageBox>
 
 Window::Window(QWidget *parent)
     : QWidget(parent)
@@ -78,10 +77,10 @@ void Window::on_connectButton_clicked()
 
 
     //set text in the bottom left for the link
-    ui->textWLinkLabel->setText("Copyright ODALID <a> http://odalid.comcontact@odalid.com</a>");//not done yet
+    ui->textWLinkLabel->setText("Copyright ODALID <a href=\"http://odalid.comcontact@odalid.com/\">http://odalid.comcontact@odalid.com</a>");
+    ui-> textWLinkLabel->setTextFormat(Qt::RichText);
+    ui->textWLinkLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ui->textWLinkLabel->setOpenExternalLinks(true);
-    ui->textWLinkLabel->wordWrap();
-    ui->textWLinkLabel->update();
 }
 
 
@@ -101,11 +100,13 @@ void Window::on_readCardBtn_clicked()
 
     //read firstname
     status = Mf_Classic_Read_Block(&MonLecteur, TRUE, 9, data, AuthKeyA, 2);
-    ui->prenomText->setText((char*) data);
+    prenom = (char *) data;
+    ui->prenomText->setText(prenom);
 
     //read lastname
     status = Mf_Classic_Read_Block(&MonLecteur,TRUE,10,data,AuthKeyA,2);
-    ui->nomText->setText((char*)data);
+    nom = (char *) data;
+    ui->nomText->setText(nom);
 
     //read counter
     status = Mf_Classic_Read_Value(&MonLecteur,TRUE,14,&value,AuthKeyA,3);
@@ -119,8 +120,7 @@ void Window::on_readCardBtn_clicked()
     }else{
         //Failed to read card
         updateFailedLEDBuzzer(status);
-       close_reader();
-//       updateFailedLEDBuzzer(status);
+        initCard();
     }
 
 }
@@ -168,10 +168,14 @@ void Window::on_updateButton_clicked()
 
     if(status == 0){
        updateSuccessLEDBuzzer(status);
-
+       QMessageBox::information(this, tr("Update Successful"), tr("You have succesfully updated your first name and last name"));
+    }else if ((nom == ui->nomText->text()) && (prenom == ui->prenomText->text())){
+        QMessageBox::warning(this,tr("Warning"), tr("first name and last name are the same, please change them and try updating again"));
+        updateFailedLEDBuzzer(status);
     }else{
        updateFailedLEDBuzzer(status);
-       qDebug("Failed to update nom or prenom!!");
+       QMessageBox::critical(this,tr("Failed"),tr("Failed to update first name and last name!!"));
+
     }
 }
 
@@ -180,6 +184,7 @@ void Window::updateSuccessLEDBuzzer( int16_t status){
     DELAYS_MS(1);
     status = LEDBuzzer(&MonLecteur, LED_GREEN_ON);
     DELAYS_S(1);
+    status = LEDBuzzer(&MonLecteur,LED_YELLOW_ON);
 }
 
 void Window::updateFailedLEDBuzzer(int16_t status){
@@ -187,8 +192,12 @@ void Window::updateFailedLEDBuzzer(int16_t status){
     DELAYS_MS(2);
     status = LEDBuzzer(&MonLecteur, LED_GREEN_ON+LED_YELLOW_ON+LED_RED_ON+LED_GREEN_ON);
     DELAYS_MS(2);
+    status = LEDBuzzer(&MonLecteur, LED_GREEN_ON+LED_YELLOW_ON+LED_RED_ON+LED_GREEN_ON);
+    DELAYS_MS(2);
     status = LEDBuzzer(&MonLecteur, LED_RED_ON);
     DELAYS_S(1);
+    status = LEDBuzzer(&MonLecteur, LED_RED_OFF);
+    status = LEDBuzzer(&MonLecteur, LED_YELLOW_ON);
 }
 
 
@@ -202,9 +211,14 @@ void Window::on_payBtn_clicked()
 
     if(nbUnits <= 0){
         qDebug("Error not enough number of units!!");
+        QMessageBox::critical(this,tr("Failed to Pay"),tr("Error not enough number of units!!"));
         updateFailedLEDBuzzer(status);
     }else if(nbDec > nbUnits){
-        qDebug("Error number to decrement exceeds the funds available!!");
+        QMessageBox::critical(this,tr("Failed to Pay"),tr("Error number to decrement exceeds the funds available!!"));
+        updateFailedLEDBuzzer(status);
+        ui->nbDecSpinner->setValue(0);
+    }else if(nbDec <=0){
+        QMessageBox::warning(this,tr("Warning"),tr("Please select a number to pay with greater than 0"));
         updateFailedLEDBuzzer(status);
     }else{
 
@@ -220,9 +234,13 @@ void Window::on_payBtn_clicked()
             ui->nbUnitText->setText(QString::number(value));
             ui->nbUnitText->update();
             ui->nbDecSpinner->update();
+            QString text = "You have sucessfully payed " + QString::number(nbDec) + " Euros";
+            std::string textStr = text.toStdString();
+            const char* textDisplay = textStr.c_str();
+            QMessageBox::information(this,tr("Success"),tr(textDisplay));
         }else{
             updateFailedLEDBuzzer(status);
-            qDebug("Failed to pay with card!!");
+            QMessageBox::critical(this,tr("Failed"),tr("Failed to pay with card!!"));
         }
 
     }
@@ -244,15 +262,22 @@ void Window::on_chargeBtn_clicked()
 
     status = Mf_Classic_Read_Value(&MonLecteur,TRUE,14,&value,AuthKeyA,3);
 
-    if(status == MI_OK){
+    if(nbIncrement <= 0){
+        QMessageBox::critical(this,tr("Failed"),tr("Choose a number greater than 0 to charge the card"));
+        updateFailedLEDBuzzer(status);
+    }
+    else if(status == MI_OK){
         updateSuccessLEDBuzzer(status);
         ui->incrementSpinner->setValue(0);
         ui->nbUnitText->setText(QString::number(value));
         ui->nbUnitText->update();
-
+        QString text = "You have sucessfully charged " + QString::number(nbIncrement) + " Euros to your card";
+        std::string textStr = text.toStdString();
+        const char* textDisplay = textStr.c_str();
+        QMessageBox::information(this,tr("Success"),tr(textDisplay));
     }else{
         updateFailedLEDBuzzer(status);
-        qDebug("Failed to charge!!");
+        QMessageBox::critical(this,tr("Failed"),tr("Failed to charge!!"));
     }
 
 }
