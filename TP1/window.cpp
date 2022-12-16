@@ -211,15 +211,15 @@ void Window::on_payBtn_clicked()
 
     if(nbUnits <= 0){
         qDebug("Error not enough number of units!!");
-        QMessageBox::critical(this,tr("Failed to Pay"),tr("Error not enough number of units!!"));
         updateFailedLEDBuzzer(status);
+        QMessageBox::critical(this,tr("Failed to Pay"),tr("Error number of units is zero!!"));
     }else if(nbDec > nbUnits){
-        QMessageBox::critical(this,tr("Failed to Pay"),tr("Error number to decrement exceeds the funds available!!"));
         updateFailedLEDBuzzer(status);
+        QMessageBox::critical(this,tr("Failed to Pay"),tr("Error number to decrement exceeds the funds available!!"));
         ui->nbDecSpinner->setValue(0);
     }else if(nbDec <=0){
-        QMessageBox::warning(this,tr("Warning"),tr("Please select a number to pay with greater than 0"));
         updateFailedLEDBuzzer(status);
+        QMessageBox::warning(this,tr("Warning"),tr("Please select a number to pay with greater than 0"));
     }else{
 
         status = Mf_Classic_Decrement_Value(&MonLecteur,TRUE,14,nbDec,13,AuthKeyA,3);
@@ -263,9 +263,9 @@ void Window::on_chargeBtn_clicked()
     status = Mf_Classic_Read_Value(&MonLecteur,TRUE,14,&value,AuthKeyA,3);
 
     if(nbIncrement <= 0){
-        QMessageBox::critical(this,tr("Failed"),tr("Choose a number greater than 0 to charge the card"));
         updateFailedLEDBuzzer(status);
-    }
+        QMessageBox::critical(this,tr("Failed"),tr("Choose a number greater than 0 to charge the card"));
+      }
     else if(status == MI_OK){
         updateSuccessLEDBuzzer(status);
         ui->incrementSpinner->setValue(0);
