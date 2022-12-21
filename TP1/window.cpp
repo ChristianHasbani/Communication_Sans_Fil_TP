@@ -115,7 +115,6 @@ void Window::on_readCardBtn_clicked()
     if(status == MI_OK){
         //update light card successfully read
         updateSuccessLEDBuzzer(status);
-        initCard();
 
     }else{
         //Failed to read card
@@ -165,13 +164,12 @@ void Window::on_updateButton_clicked()
     }
     status = Mf_Classic_Write_Block(&MonLecteur,TRUE,10,data,AuthKeyB,2);
 
-
-    if(status == 0){
-       updateSuccessLEDBuzzer(status);
-       QMessageBox::information(this, tr("Update Successful"), tr("You have succesfully updated your first name and last name"));
-    }else if ((nom == ui->nomText->text()) && (prenom == ui->prenomText->text())){
+    if ((nom == ui->nomText->text()) && (prenom == ui->prenomText->text())){
         QMessageBox::warning(this,tr("Warning"), tr("first name and last name are the same, please change them and try updating again"));
         updateFailedLEDBuzzer(status);
+    }else if(status == 0){
+        updateSuccessLEDBuzzer(status);
+        QMessageBox::information(this, tr("Update Successful"), tr("You have succesfully updated your first name and last name"));
     }else{
        updateFailedLEDBuzzer(status);
        QMessageBox::critical(this,tr("Failed"),tr("Failed to update first name and last name!!"));
@@ -221,12 +219,11 @@ void Window::on_payBtn_clicked()
         updateFailedLEDBuzzer(status);
         QMessageBox::warning(this,tr("Warning"),tr("Please select a number to pay with greater than 0"));
     }else{
-
+        //decrementing and saving his new wallet
         status = Mf_Classic_Decrement_Value(&MonLecteur,TRUE,14,nbDec,13,AuthKeyA,3);
         status = Mf_Classic_Restore_Value(&MonLecteur,TRUE,13,14,AuthKeyB,3);
 
         status = Mf_Classic_Read_Value(&MonLecteur,TRUE,14,&value,AuthKeyA,3);
-
 
         if(status == MI_OK){
             updateSuccessLEDBuzzer(status);
@@ -242,12 +239,7 @@ void Window::on_payBtn_clicked()
             updateFailedLEDBuzzer(status);
             QMessageBox::critical(this,tr("Failed"),tr("Failed to pay with card!!"));
         }
-
     }
-
-
-
-
 }
 
 
