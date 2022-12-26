@@ -223,7 +223,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Nombre d'unités à décrémenter</string>
+     <string>Nombre d'unités à incrémenter</string>
     </property>
    </widget>
   </widget>

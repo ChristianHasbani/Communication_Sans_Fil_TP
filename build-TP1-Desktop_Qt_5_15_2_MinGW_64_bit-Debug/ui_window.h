@@ -169,7 +169,7 @@ public:
         payBtn->setText(QCoreApplication::translate("Window", "Payer", nullptr));
         groupBox_3->setTitle(QCoreApplication::translate("Window", "Incr\303\251menter le porte monnaie", nullptr));
         chargeBtn->setText(QCoreApplication::translate("Window", "Charger", nullptr));
-        nbIncreDescLabel->setText(QCoreApplication::translate("Window", "Nombre d'unit\303\251s \303\240 d\303\251cr\303\251menter", nullptr));
+        nbIncreDescLabel->setText(QCoreApplication::translate("Window", "Nombre d'unit\303\251s \303\240 incr\303\251menter", nullptr));
         connectButton->setText(QCoreApplication::translate("Window", "Connect", nullptr));
         disconnectButton->setText(QCoreApplication::translate("Window", "Disconnect", nullptr));
         versionLabel->setText(QString());
